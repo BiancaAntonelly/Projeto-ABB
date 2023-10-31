@@ -1,61 +1,41 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArvoreBB {
-
 	public static No raiz = null;
 	public static int quantidadeDeNos = 0;
+	List<No> arvore = new ArrayList<>();
 
-	public static boolean inserir(No no) {
-		if (raiz == null) {
-			raiz = no;
-			quantidadeDeNos++;
-			System.out.println(no.valor + " adicionado");
-			return true;
+	public void inserirNo(No noNovo, No noAtual) {
+		if (noAtual == null) {
+			noAtual = raiz;
 		}
 
-		No atual = raiz;
-		List<No> elementosFilhos = new LinkedList<>();
-		List<String> lado = new LinkedList<>();
-
-		while (true) {
-			if (no.valor == atual.valor) {
-				System.out.println(no.valor + " já está na árvore, não pode ser inserido");
-				return false;
-			} else if (no.valor < atual.valor) {
-				lado.add("esquerdo");
-				elementosFilhos.add(atual);
-				if (atual.noEsquerdo == null) {
-					atual.noEsquerdo = no;
-					quantidadeDeNos++;
-					System.out.println(no.valor + " adicionado");
-					atualizarQuantidades(elementosFilhos, lado, "esquerdo");
-					return true;
-				} else {
-					atual = atual.noEsquerdo;
-				}
+		if (noNovo.getValor() == noAtual.getValor()) {
+			System.out.println(noNovo.getValor() + " já está na árvore, não pode ser inserido");
+		} else if (noNovo.getValor()< noAtual.getValor()) {
+			if (noAtual.getNoEsquerdo() != null) {
+				inserirNo(noNovo, noAtual.getNoEsquerdo());
 			} else {
-				lado.add("direito");
-				elementosFilhos.add(atual);
-				if (atual.noDireito == null) {
-					atual.noDireito = no;
-					quantidadeDeNos++;
-					System.out.println(no.valor + " adicionado");
-					atualizarQuantidades(elementosFilhos, lado, "direito");
-					return true;
-				} else {
-					atual = atual.noDireito;
-				}
+				noAtual.setNoEsquerdo(noNovo);
+				arvore.add(noNovo);
 			}
+		} else if (noNovo.getValor() > noAtual.getValor()) {
+			 if(noAtual.getNoDireito() != null) {
+				inserirNo(noNovo, noAtual.getNoDireito());
+			 } else {
+				noAtual.setNoDireito(noNovo);
+				arvore.add(noNovo);
+			 }
 		}
 	}
 
 	private static void atualizarQuantidades(List<No> elementosFilhos, List<String> lado, String direcao) {
 		for (int i = 0; i < elementosFilhos.size(); i++) {
 			if (lado.get(i).equals(direcao)) {
-				elementosFilhos.get(i).quantidadeDeNosAEsquerda++;
+				elementosFilhos.get(i).setQuantidadeDeNosAEsquerda(1);
 			} else {
-				elementosFilhos.get(i).quantidadeDeNosADireita++;
+				elementosFilhos.get(i).setQuantidadeDeNosADireita(1);
 			}
 		}
 	}
@@ -71,20 +51,20 @@ public class ArvoreBB {
 	}
 
 	private static int enesimoElementoRecursivo(No no, int enesimo) {
-		if (no.noEsquerdo != null) {
-			int qtdNosEsquerda = no.noEsquerdo.quantidadeTotalDeFilhos();
+		if (no.getNoEsquerdo() != null) {
+			int qtdNosEsquerda = no.getNoEsquerdo().quantidadeTotalDeFilhos();
 			if (qtdNosEsquerda + 1 == enesimo) {
-				return no.valor;
+				return no.getValor();
 			} else if (qtdNosEsquerda + 1 > enesimo) {
-				return enesimoElementoRecursivo(no.noEsquerdo, enesimo);
+				return enesimoElementoRecursivo(no.getNoEsquerdo(), enesimo);
 			} else {
-				return enesimoElementoRecursivo(no.noDireito, enesimo - qtdNosEsquerda - 1);
+				return enesimoElementoRecursivo(no.getNoDireito(), enesimo - qtdNosEsquerda - 1);
 			}
 		} else {
 			if (enesimo == 1) {
-				return no.valor;
+				return no.getValor();
 			} else {
-				return enesimoElementoRecursivo(no.noDireito, enesimo - 1);
+				return enesimoElementoRecursivo(no.getNoDireito(), enesimo - 1);
 			}
 		}
 	}
@@ -123,10 +103,10 @@ public class ArvoreBB {
 			return 0;
 		}
 
-		int somaEsquerda = calcularSoma(no.noEsquerdo);
-		int somaDireita = calcularSoma(no.noDireito);
+		int somaEsquerda = calcularSoma(no.getNoEsquerdo());
+		int somaDireita = calcularSoma(no.getNoDireito());
 
-		return somaEsquerda + no.valor + somaDireita;
+		return somaEsquerda + no.getValor() + somaDireita;
 	}
 
 	public static String cheiaOuNaoCheia(No raiz) {
@@ -134,13 +114,13 @@ public class ArvoreBB {
 			return "A árvore é cheia";
 		}
 
-		if (raiz.noEsquerdo == null && raiz.noDireito == null) {
+		if (raiz.getNoEsquerdo() == null && raiz.getNoDireito() == null) {
 			return "A árvore é cheia";
 		}
 
-		if ((raiz.noEsquerdo != null) && (raiz.noDireito != null)) {
-			String resultadoEsquerdo = cheiaOuNaoCheia(raiz.noEsquerdo);
-			String resultadoDireito = cheiaOuNaoCheia(raiz.noDireito);
+		if ((raiz.getNoEsquerdo() != null) && (raiz.getNoDireito() != null)) {
+			String resultadoEsquerdo = cheiaOuNaoCheia(raiz.getNoEsquerdo());
+			String resultadoDireito = cheiaOuNaoCheia(raiz.getNoDireito());
 
 			if (resultadoEsquerdo.equals("A árvore é cheia") && resultadoDireito.equals("A árvore é cheia")) {
 				return "A árvore é cheia";
@@ -149,7 +129,10 @@ public class ArvoreBB {
 
 		return "A árvore não é cheia";
 	}
-
-
+    
+	public void imprimirArvore() {
+		for(No no: arvore) {
+			System.out.println(no.getValor());
+		}
+	}
 }
-

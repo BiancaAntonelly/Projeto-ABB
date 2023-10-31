@@ -1,16 +1,24 @@
 import java.io.*;
 import java.util.Scanner;
 
+import javax.swing.text.html.StyleSheet;
+
 public class Main {
     public static void arvoreEntrada(String caminhoArquivo) {
+        ArvoreBB arvoreBB = new ArvoreBB();
         try {
             Scanner sc = new Scanner(new File(caminhoArquivo));
             sc.useDelimiter(" ");
+            No no = new No(Integer.parseInt(sc.next()));
 
             while (sc.hasNext()) {
                 int linha = Integer.parseInt(sc.next());
-                ArvoreBB.inserir(new No(linha));
+                arvoreBB.inserirNo(new No(linha), no);
             }
+
+            arvoreBB.imprimirArvore();
+
+            System.out.println(no.getValor());
 
             sc.close();
         } catch (FileNotFoundException e) {
@@ -18,7 +26,7 @@ public class Main {
         }
     }
 
-    public static void comandosdeEntrada(String caminhoArquivo) {
+   public static void comandosdeEntrada(String caminhoArquivo) {
         try {
             File comandos = new File(caminhoArquivo);
             FileReader leitura = new FileReader(comandos);
@@ -55,9 +63,10 @@ public class Main {
             System.err.println("Ocorreu um erro de leitura do arquivo: " + e.getMessage());
         }
     }
+
     public static void main(String[] args) {
-        arvoreEntrada("C:\\Users\\bianc\\OneDrive\\Documentos\\GitHub\\Projeto-ABB\\src\\arquivostxt\\abb");
-        comandosdeEntrada("C:\\Users\\bianc\\OneDrive\\Documentos\\GitHub\\Projeto-ABB\\src\\arquivostxt\\arquivoEntrada");
+        arvoreEntrada("C:\\Users\\v_mar\\Desktop\\ProjetoABB\\Projeto-ABB\\src\\arquivostxt\\abb");
+        comandosdeEntrada("C:\\Users\\v_mar\\Desktop\\ProjetoABB\\Projeto-ABB\\src\\arquivostxt\\abb");
 
     }
 }
