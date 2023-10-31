@@ -2,6 +2,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ArvoreBB {
+
 	public static No raiz = null;
 	public static int quantidadeDeNos = 0;
 
@@ -105,4 +106,50 @@ public class ArvoreBB {
 		return valorMediana;
 	}
 
+	public static int media() {
+		int nosTotais = raiz.quantidadeTotalDeFilhos();
+		int soma = calcularSoma(raiz);
+
+		if (nosTotais > 0) {
+			int valorMedia = soma / nosTotais;
+			return valorMedia;
+		} else {
+			return 0;
+		}
+	}
+
+	private static int calcularSoma(No no) {
+		if (no == null) {
+			return 0;
+		}
+
+		int somaEsquerda = calcularSoma(no.noEsquerdo);
+		int somaDireita = calcularSoma(no.noDireito);
+
+		return somaEsquerda + no.valor + somaDireita;
+	}
+
+	public static String cheiaOuNaoCheia(No raiz) {
+		if (raiz == null) {
+			return "A árvore é cheia";
+		}
+
+		if (raiz.noEsquerdo == null && raiz.noDireito == null) {
+			return "A árvore é cheia";
+		}
+
+		if ((raiz.noEsquerdo != null) && (raiz.noDireito != null)) {
+			String resultadoEsquerdo = cheiaOuNaoCheia(raiz.noEsquerdo);
+			String resultadoDireito = cheiaOuNaoCheia(raiz.noDireito);
+
+			if (resultadoEsquerdo.equals("A árvore é cheia") && resultadoDireito.equals("A árvore é cheia")) {
+				return "A árvore é cheia";
+			}
+		}
+
+		return "A árvore não é cheia";
+	}
+
+
 }
+

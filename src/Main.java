@@ -38,6 +38,12 @@ public class Main {
                     case "MEDIANA":
                         System.out.println(ArvoreBB.mediana());
                         break;
+                    case "MEDIA":
+                        System.out.println(ArvoreBB.media());
+                        break;
+                    case "CHEIA":
+                        System.out.println(ArvoreBB.cheiaOuNaoCheia(ArvoreBB.raiz));
+                        break;
                     default:
                         break;
                 }
@@ -50,8 +56,8 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-        arvoreEntrada("C:\\Users\\bianc\\OneDrive\\Documentos\\GitHub\\Projeto EDB\\src\\arquivostxt\\abb");
-        comandosdeEntrada("C:\\Users\\bianc\\OneDrive\\Documentos\\GitHub\\Projeto EDB\\src\\arquivostxt\\arquivoEntrada");
+        arvoreEntrada("C:\\Users\\bianc\\OneDrive\\Documentos\\GitHub\\Projeto-ABB\\src\\arquivostxt\\abb");
+        comandosdeEntrada("C:\\Users\\bianc\\OneDrive\\Documentos\\GitHub\\Projeto-ABB\\src\\arquivostxt\\arquivoEntrada");
 
     }
 }
