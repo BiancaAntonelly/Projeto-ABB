@@ -1,46 +1,60 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class ArvoreBB {
-	public static No raiz = null;
-	public static int quantidadeDeNos = 0;
-	List<No> arvore = new ArrayList<>();
+	private No raiz = null;
+	private int quantidadeDeNos = 0;
+
+	public ArvoreBB (No raiz){
+		this.raiz = raiz;
+	}
 
 	public void inserirNo(No noNovo, No noAtual) {
-		if (noAtual == null) {
-			noAtual = raiz;
-		}
-
-		if (noNovo.getValor() == noAtual.getValor()) {
-			System.out.println(noNovo.getValor() + " já está na árvore, não pode ser inserido");
-		} else if (noNovo.getValor()< noAtual.getValor()) {
-			if (noAtual.getNoEsquerdo() != null) {
-				inserirNo(noNovo, noAtual.getNoEsquerdo());
-			} else {
-				noAtual.setNoEsquerdo(noNovo);
-				arvore.add(noNovo);
+			if (noNovo.getValor() == noAtual.getValor()) {
+				System.out.println(noNovo.getValor() + " já está na árvore, não pode ser inserido");
+			} else if (noNovo.getValor()< noAtual.getValor()) {
+				if (noAtual.getNoEsquerdo() != null) {
+					inserirNo(noNovo, noAtual.getNoEsquerdo());
+				} else {
+					noAtual.setNoEsquerdo(noNovo);
+					noAtual.setQuantidadeDeNosAEsquerda(noAtual.getQuantidadeDeNosAEsquerda() + 1);
+				}
+			} else if (noNovo.getValor() > noAtual.getValor()) {
+				if(noAtual.getNoDireito() != null) {
+					inserirNo(noNovo, noAtual.getNoDireito());
+				} else {
+					noAtual.setNoDireito(noNovo);
+					noAtual.setQuantidadeDeNosADireita(noAtual.getQuantidadeDeNosADireita() + 1);
+				}
 			}
-		} else if (noNovo.getValor() > noAtual.getValor()) {
-			 if(noAtual.getNoDireito() != null) {
-				inserirNo(noNovo, noAtual.getNoDireito());
-			 } else {
-				noAtual.setNoDireito(noNovo);
-				arvore.add(noNovo);
-			 }
-		}
 	}
 
-	private static void atualizarQuantidades(List<No> elementosFilhos, List<String> lado, String direcao) {
-		for (int i = 0; i < elementosFilhos.size(); i++) {
-			if (lado.get(i).equals(direcao)) {
-				elementosFilhos.get(i).setQuantidadeDeNosAEsquerda(1);
-			} else {
-				elementosFilhos.get(i).setQuantidadeDeNosADireita(1);
+	public No buscaNo(int valor, No noAtual) {
+		if (valor == noAtual.getValor()){
+			return noAtual;
+		} if(valor < noAtual.getValor()) {
+			if(noAtual.getNoEsquerdo() != null) {
+				buscaNo(valor, noAtual.getNoEsquerdo());
+			}
+		} else if (valor > noAtual.getValor()) {
+			if(noAtual.getNoDireito() != null) {
+				buscaNo(valor, noAtual.getNoDireito());
 			}
 		}
+
+		return null;
 	}
 
-	public static int enesimoElemento(int enesimo) {
+	public void imprimirArvore(No no) {
+		if (no.getNoEsquerdo() != null) {
+			imprimirArvore(no.getNoEsquerdo());
+		} 
+
+		if (no.getNoDireito() != null) {
+			imprimirArvore(no.getNoDireito());
+		}
+
+		System.out.println("Nó: "+ no.getValor());
+	}
+
+	public int enesimoElemento(int enesimo) {
 		if (raiz == null || enesimo <= 0 || enesimo > raiz.quantidadeTotalDeFilhos()) {
 			System.out.println(raiz.quantidadeTotalDeFilhos());
 			System.out.println("O 'n' excede o número de nós da árvore");
@@ -69,7 +83,7 @@ public class ArvoreBB {
 		}
 	}
 
-	public static int mediana() {
+	public int mediana() {
 		int nosTotais = raiz.quantidadeTotalDeFilhos();
 		int valorMediana;
 
@@ -86,7 +100,7 @@ public class ArvoreBB {
 		return valorMediana;
 	}
 
-	public static int media() {
+	public int media() {
 		int nosTotais = raiz.quantidadeTotalDeFilhos();
 		int soma = calcularSoma(raiz);
 
@@ -98,7 +112,7 @@ public class ArvoreBB {
 		}
 	}
 
-	private static int calcularSoma(No no) {
+	private int calcularSoma(No no) {
 		if (no == null) {
 			return 0;
 		}
@@ -128,11 +142,5 @@ public class ArvoreBB {
 		}
 
 		return "A árvore não é cheia";
-	}
-    
-	public void imprimirArvore() {
-		for(No no: arvore) {
-			System.out.println(no.getValor());
-		}
 	}
 }
