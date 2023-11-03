@@ -15,11 +15,16 @@ public class Main {
                 int linha = Integer.parseInt(sc.next());
                 arvoreBB.inserirNo(new No(linha), no);
             }
-            arvoreBB.imprimirArvore(no);
-           arvoreBB.buscaNo(32, no);
-           //System.out.println("nó buscado: " +n.getValor());
-           
             sc.close();
+
+            arvoreBB.imprimirArvore(no);
+
+            No n = arvoreBB.buscaNo(5, no);
+            if(n == null) {
+                System.out.println("O nó buscado não existe na árvore");
+            } else {
+                 System.out.println("O nó " + n.getValor() + " existe na árvore binária");
+            }
         } catch (FileNotFoundException e) {
             System.err.println("O arquivo não foi encontrado: " + caminhoArquivo);
         }

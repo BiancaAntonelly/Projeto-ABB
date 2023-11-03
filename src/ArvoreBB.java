@@ -27,19 +27,21 @@ public class ArvoreBB {
 	}
 
 	public No buscaNo(int valor, No noAtual) {
-		if (valor == noAtual.getValor()){
-			return noAtual;
-		} if(valor < noAtual.getValor()) {
-			if(noAtual.getNoEsquerdo() != null) {
-				buscaNo(valor, noAtual.getNoEsquerdo());
-			}
-		} else if (valor > noAtual.getValor()) {
-			if(noAtual.getNoDireito() != null) {
-				buscaNo(valor, noAtual.getNoDireito());
-			}
-		}
+		 if (valor == noAtual.getValor()){
+          return noAtual;
+      } 
 
-		return null;
+      if(valor < noAtual.getValor()) {
+          if(noAtual.getNoEsquerdo() != null) {
+              return buscaNo(valor, noAtual.getNoEsquerdo());
+          }
+          return null;
+      } else {
+          if(noAtual.getNoDireito() != null) {
+              return buscaNo(valor, noAtual.getNoDireito());
+          }
+          return null;
+      }
 	}
 
 	public void imprimirArvore(No no) {
