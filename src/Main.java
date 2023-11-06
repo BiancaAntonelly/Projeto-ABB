@@ -25,6 +25,13 @@ public class Main {
             } else {
                  System.out.println("O nó " + n.getValor() + " existe na árvore binária");
             }
+
+
+           System.out.println("O valor do enesimo é: "+ arvoreBB.enesimoElemento(2));
+
+           String r = arvoreBB.preOrdem(no);
+           System.out.println("Impressão em pré-ordem: "+ r);
+
         } catch (FileNotFoundException e) {
             System.err.println("O arquivo não foi encontrado: " + caminhoArquivo);
         }

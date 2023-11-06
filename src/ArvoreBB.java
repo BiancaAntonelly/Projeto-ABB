@@ -6,6 +6,10 @@ public class ArvoreBB {
 		this.raiz = raiz;
 	}
 
+	public No getRaiz (){
+		return raiz;
+	}
+
 	public void inserirNo(No noNovo, No noAtual) {
 			if (noNovo.getValor() == noAtual.getValor()) {
 				System.out.println(noNovo.getValor() + " já está na árvore, não pode ser inserido");
@@ -29,19 +33,19 @@ public class ArvoreBB {
 	public No buscaNo(int valor, No noAtual) {
 		 if (valor == noAtual.getValor()){
           return noAtual;
-      } 
+        } 
 
-      if(valor < noAtual.getValor()) {
-          if(noAtual.getNoEsquerdo() != null) {
-              return buscaNo(valor, noAtual.getNoEsquerdo());
-          }
-          return null;
-      } else {
-          if(noAtual.getNoDireito() != null) {
-              return buscaNo(valor, noAtual.getNoDireito());
-          }
-          return null;
-      }
+		if(valor < noAtual.getValor()) {
+			if(noAtual.getNoEsquerdo() != null) {
+				return buscaNo(valor, noAtual.getNoEsquerdo());
+			}
+			return null;
+		} else {
+			if(noAtual.getNoDireito() != null) {
+				return buscaNo(valor, noAtual.getNoDireito());
+			}
+			return null;
+		}
 	}
 
 	public void imprimirArvore(No no) {
@@ -66,7 +70,7 @@ public class ArvoreBB {
 		return enesimoElementoRecursivo(raiz, enesimo);
 	}
 
-	private static int enesimoElementoRecursivo(No no, int enesimo) {
+	private int enesimoElementoRecursivo(No no, int enesimo) {
 		if (no.getNoEsquerdo() != null) {
 			int qtdNosEsquerda = no.getNoEsquerdo().quantidadeTotalDeFilhos();
 			if (qtdNosEsquerda + 1 == enesimo) {
@@ -144,5 +148,23 @@ public class ArvoreBB {
 		}
 
 		return "A árvore não é cheia";
+	}
+
+	public String preOrdem(No no) {
+		String resultado = "";
+		
+		if(no != null){
+			resultado += " " + Integer.toString(no.getValor());
+			
+			if(no.getNoEsquerdo() != null) {
+				resultado += preOrdem(no.getNoEsquerdo());
+			}
+
+			if (no.getNoDireito() != null) {
+			 	resultado += preOrdem(no.getNoDireito());
+			}
+		} 
+		
+		return resultado;
 	}
 }
