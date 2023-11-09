@@ -32,6 +32,9 @@ public class Main {
            String r = arvoreBB.preOrdem(no);
            System.out.println("Impressão em pré-ordem: "+ r);
 
+            
+           System.out.println("Ordem simétrica");
+           arvoreBB.ordemSimetrica(no);
         } catch (FileNotFoundException e) {
             System.err.println("O arquivo não foi encontrado: " + caminhoArquivo);
         }

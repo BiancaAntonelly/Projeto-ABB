@@ -48,6 +48,41 @@ public class ArvoreBB {
 		}
 	}
 
+	public int noMin(No no) {
+		if (no == null) return -1;
+		if(no.getNoEsquerdo() == null) return no.getValor();
+		return noMin(no.getNoEsquerdo());
+	}
+
+	public int noMax(No no) {
+		if (no == null) return -1;
+		if(no.getNoDireito() == null) return no.getValor();
+		
+		return noMax(no.getNoDireito());
+	}
+
+	public No removerNo(int valor, No no) {
+		if (no == null) return no;
+
+		if (valor < no.getValor()) {
+			no.setNoEsquerdo(removerNo(valor, no.getNoEsquerdo()));
+		} else if(valor > no.getValor()) {
+			no.setNoDireito(removerNo(valor, no.getNoDireito()));
+		} else {
+			if(no.getNoEsquerdo() == null) {
+				return no.getNoDireito();
+			} else if(no.getNoDireito() == null) {
+				return no.getNoEsquerdo();
+			} else {
+				int noAtual = noMin(no.getNoDireito());
+				no.setValor(noAtual);
+				no.setNoDireito(removerNo(noAtual, no.getNoDireito()));
+			}
+		}
+
+		return no;
+	}
+
 	public void imprimirArvore(No no) {
 		if (no.getNoEsquerdo() != null) {
 			imprimirArvore(no.getNoEsquerdo());
