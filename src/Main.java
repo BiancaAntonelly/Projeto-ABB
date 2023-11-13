@@ -33,8 +33,10 @@ public class Main {
            System.out.println("Impressão em pré-ordem: "+ r);
 
             
-           System.out.println("Ordem simétrica");
-           arvoreBB.ordemSimetrica(no);
+           System.out.println(arvoreBB.cheiaOuNaoCheia(no));
+           System.out.println(arvoreBB.ehCompleta(no));
+            System.out.println("Altura: "+arvoreBB.altura(no));
+           //arvoreBB.ordemSimetrica(no);
         } catch (FileNotFoundException e) {
             System.err.println("O arquivo não foi encontrado: " + caminhoArquivo);
         }
@@ -79,7 +81,7 @@ public class Main {
     }*/
 
     public static void main(String[] args) {
-        arvoreEntrada("C:\\Users\\v_mar\\Desktop\\ProjetoABB\\Projeto-ABB\\src\\arquivostxt\\abb");
+        arvoreEntrada("C:\\Users\\v_mar\\Desktop\\ProjetoEDB2\\Projeto-ABB\\src\\arquivostxt\\abb");
         //comandosdeEntrada("C:\\Users\\v_mar\\Desktop\\ProjetoABB\\Projeto-ABB\\src\\arquivostxt\\abb");
     }
 }

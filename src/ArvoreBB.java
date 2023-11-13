@@ -1,3 +1,8 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+import javax.swing.tree.TreeNode;
+
 public class ArvoreBB {
 	private No raiz = null;
 	private int quantidadeDeNos = 0;
@@ -202,4 +207,48 @@ public class ArvoreBB {
 		
 		return resultado;
 	}
+
+	public int altura(No no) {
+		if(no == null) { 
+			return -1;
+		} else {
+			int qtdNosEsquerda = altura(no.getNoEsquerdo());
+			int qtdNosDireita = altura(no.getNoDireito());
+			if(qtdNosEsquerda > qtdNosDireita) {
+				return qtdNosEsquerda + 1;
+			} else {
+				return qtdNosDireita + 1;
+			}
+		}
+	}
+
+	public boolean verificaCompleta(No no) {
+		if (no == null) {
+			return true;
+		}
+
+		int alturaRaiz = altura(raiz);
+		int altura = altura(no);
+	
+		if (altura < alturaRaiz || altura < alturaRaiz - 1) {
+			return false;
+		}
+	
+		return (verificaCompleta(no.getNoEsquerdo()) &&
+				verificaCompleta(no.getNoDireito()));
+	}
+
+	public String ehCompleta(No no) {
+		if (no == null) {
+			return "A árvore é completa!";
+		}
+	
+		boolean completa = verificaCompleta(no);
+	
+		if (completa) {
+			return "A árvore é completa!";
+		} else {
+			return "A árvore não é completa!";
+		}
+    }
 }
