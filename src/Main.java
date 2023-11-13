@@ -1,8 +1,6 @@
 import java.io.*;
 import java.util.Scanner;
 
-import javax.swing.text.html.StyleSheet;
-
 public class Main {
     public static void comandosdeEntrada(String abbEntrada, String caminhoArquivo) {
         try {
