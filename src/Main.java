@@ -61,13 +61,13 @@ public class Main {
                        arvoreBB.setRaiz(no);
                        break;
                     case "IMPRIMA":
-                        if(Integer.parseInt(entrada[1]) == 1) {
-                            System.out.println("Impressão 1: ");
-                            arvoreBB.imprimirBarras(arvoreBB.getRaiz(), 0, 0);
-                        } else {
-                            System.out.println("Impressão 2: " + "\n" + arvoreBB.imprimirParenteses(arvoreBB.getRaiz()));
+                        if (entrada[1].equals("1")) {
+                            ArvoreBB.imprimirBarras(arvoreBB.getRaiz(), 25, 0);
+                        } else if (entrada[1].equals("2")) {
+                            System.out.println(ArvoreBB.imprimirParenteses(arvoreBB.getRaiz()));
                         }
                         break;
+
                     case "POSICAO": 
                         //...
                         break;
@@ -84,7 +84,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        comandosdeEntrada("C:\\Users\\v_mar\\Documents\\UFRN 2023.2\\EDB II\\ProjetoEDB2\\Projeto-ABB\\src\\arquivostxt\\abb", 
-        "C:\\Users\\v_mar\\Documents\\UFRN 2023.2\\EDB II\\ProjetoEDB2\\Projeto-ABB\\src\\arquivostxt\\arquivoEntrada");
+        ArvoreBB arvore = new ArvoreBB();
+        comandosdeEntrada("C:\\Users\\bianc\\Downloads\\Projeto-ABB-main\\src\\arquivostxt\\abb",
+                "C:\\Users\\bianc\\Downloads\\Projeto-ABB-main\\src\\arquivostxt\\arquivoEntrada");
     }
 }

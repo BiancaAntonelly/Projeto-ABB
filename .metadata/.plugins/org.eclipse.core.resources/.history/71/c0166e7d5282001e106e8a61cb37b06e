@@ -1,0 +1,92 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class Main {
+    public static void comandosdeEntrada(String abbEntrada, String caminhoArquivo) {
+        try {
+            Scanner sc = new Scanner(new File(abbEntrada));
+            sc.useDelimiter(" ");
+            No no = new No(Integer.parseInt(sc.next()));
+            ArvoreBB arvoreBB = new ArvoreBB(no);
+
+            while (sc.hasNext()) {
+                int linha = Integer.parseInt(sc.next());
+                arvoreBB.inserirNo(new No(linha), no);
+            }
+            sc.close();
+
+            File comandos = new File(caminhoArquivo);
+            FileReader leitura = new FileReader(comandos);
+            BufferedReader bufferedReader = new BufferedReader(leitura);
+            String linha = "";
+
+            while ((linha = bufferedReader.readLine()) != null) {
+                String[] entrada = new String[2];
+                entrada[0] = linha;
+                if (linha.contains(" ")) {
+                    entrada = linha.split(" ");
+                }
+                switch (entrada[0]) {
+                    case "ENESIMO":
+                        System.out.println(arvoreBB.enesimoElemento(Integer.parseInt(entrada[1])));
+                        break;
+                    case "MEDIANA":
+                        System.out.println(arvoreBB.mediana());
+                        break;
+                    case "MEDIA":
+                        System.out.println(arvoreBB.media());
+                        break;
+                    case "CHEIA":
+                        System.out.println(arvoreBB.cheiaOuNaoCheia(arvoreBB.getRaiz()));
+                        break;
+                    case "COMPLETA": 
+                        System.out.println(arvoreBB.ehCompleta(arvoreBB.getRaiz()));
+                        break;
+                    case "PREORDEM": 
+                        System.out.println("Impressão em pré-ordem:" + arvoreBB.preOrdem(arvoreBB.getRaiz()));
+                        break;
+                    case "INSIRA":
+                        arvoreBB.inserirNo(new No(Integer.parseInt(entrada[1])), no);
+                        break;
+                    case "BUSCAR":
+                        No k = arvoreBB.buscaNo(Integer.parseInt(entrada[1]), no);
+                        if(k != null) {
+                            System.out.println("O nó com valor "+ k.getValor() + " existe na árvore");
+                        } else {
+                             System.out.println("O nó não existe na árvore");
+                        }
+                        break;
+                    case "REMOVA":
+                       No n = arvoreBB.removerNo(Integer.parseInt(entrada[1]), arvoreBB.getRaiz());
+                       arvoreBB.setRaiz(no);
+                       break;
+                    case "IMPRIMA":
+                        if(Integer.parseInt(entrada[1]) == 1) {
+                            System.out.println("Impressão 1: ");
+                            arvoreBB.imprimirBarras(arvoreBB.getRaiz(), 0, 0);
+                        } else {
+                            System.out.println("Impressão 2: " + "\n" + arvoreBB.imprimirParenteses(arvoreBB.getRaiz()));
+                        }
+                        break;
+                    case "POSICAO": 
+                        //...
+                        break;
+                    default:
+                        break;
+                }
+            }
+            bufferedReader.close();
+        } catch (FileNotFoundException e) {
+            System.err.println("O arquivo de entrada de dados não foi encontrado");
+        } catch (IOException e) {
+            System.err.println("Ocorreu um erro de leitura do arquivo: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+
+
+        comandosdeEntrada("C:\\Users\\bianc\\Downloads\\Projeto-ABB-main\\src\\arquivostxt\\abb",
+                "C:\\Users\bianc\\Downloads\\Projeto-ABB-main\\src\\arquivostxt\\arquivoEntrada");
+    }
+}

@@ -227,33 +227,32 @@ public class ArvoreBB {
 
 	public static void imprimirBarras(No raiz, int tracos, int blank) {
 		if (raiz != null) {
-			if (raiz != null) {
-				String vazios = "";
-				if (Integer.toString(raiz.getValor()).length() < 2) {
-					blank += Integer.toString(raiz.getValor()).length();
-				}
+			String vazios = "";
 
-				int i;
-				for(i = 0; i < blank; ++i) {
-					vazios = vazios + " ";
-				}
-
-				System.out.print(vazios + raiz.getValor());
-				if (Integer.toString(raiz.getValor()).length() > 2) {
-					tracos -= Integer.toString(raiz.getValor()).length() - 2;
-				}
-
-				for(i = 0; i < tracos; ++i) {
-					System.out.print("-");
-				}
-
-				System.out.print("\n");
-				imprimirBarras(raiz.getNoEsquerdo(), tracos - 4, blank + 4);
-				imprimirBarras(raiz.getNoDireito(), tracos - 4, blank + 4);
+			if (Integer.toString(raiz.getValor()).length() < 2) {
+				blank += Integer.toString(raiz.getValor()).length();
 			}
 
+			for (int i = 0; i < blank; ++i) {
+				vazios = vazios + " ";
+			}
+
+			System.out.print(vazios + raiz.getValor());
+			if (Integer.toString(raiz.getValor()).length() > 2) {
+				tracos -= Integer.toString(raiz.getValor()).length() - 2;
+			}
+
+			for (int i = 0; i < tracos; ++i) {
+				System.out.print("-");
+			}
+
+			System.out.print("\n");
+
+			imprimirBarras(raiz.getNoEsquerdo(), tracos - 4, blank + 4);
+			imprimirBarras(raiz.getNoDireito(), tracos - 4, blank + 4);
 		}
 	}
+
 
 	public static String imprimirParenteses(No raiz) {
 		String saida = " (";
