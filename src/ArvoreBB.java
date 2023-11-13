@@ -209,7 +209,70 @@ public class ArvoreBB {
 	}
 
 	public int altura(No no) {
-		if(no == null) { 
+		if(no == null) {
+			return -1;
+		} else {
+			int qtdNosEsquerda = altura(no.getNoEsquerdo());
+			int qtdNosDireita = altura(no.getNoDireito());
+			if(qtdNosEsquerda > qtdNosDireita) {
+				return qtdNosEsquerda + 1;
+			} else {
+				return qtdNosDireita + 1;
+			}
+		}
+	}
+
+	public static void imprimirBarras(No raiz, int tracos, int blank) {
+		if (raiz != null) {
+			if (raiz != null) {
+				String vazios = "";
+				if (Integer.toString(raiz.getValor()).length() < 2) {
+					blank += Integer.toString(raiz.getValor()).length();
+				}
+
+				int i;
+				for(i = 0; i < blank; ++i) {
+					vazios = vazios + " ";
+				}
+
+				System.out.print(vazios + raiz.getValor());
+				if (Integer.toString(raiz.getValor()).length() > 2) {
+					tracos -= Integer.toString(raiz.getValor()).length() - 2;
+				}
+
+				for(i = 0; i < tracos; ++i) {
+					System.out.print("-");
+				}
+
+				System.out.print("\n");
+				imprimirBarras(raiz.getNoEsquerdo(), tracos - 4, blank + 4);
+				imprimirBarras(raiz.getNoDireito(), tracos - 4, blank + 4);
+			}
+
+		}
+	}
+
+	public static String imprimirParenteses(No raiz) {
+		String saida = " (";
+		saida = saida + raiz.getValor();
+		if (raiz.getNoEsquerdo() != null) {
+			saida = saida + imprimirParenteses(raiz.getNoEsquerdo());
+		}
+
+		if (raiz.getNoDireito() != null) {
+			saida = saida + imprimirParenteses(raiz.getNoDireito());
+		}
+
+		saida = saida + ")";
+		return saida;
+	}
+
+
+}
+
+/*
+	public int altura(No no) {
+		if(no == null) {
 			return -1;
 		} else {
 			int qtdNosEsquerda = altura(no.getNoEsquerdo());
@@ -252,3 +315,4 @@ public class ArvoreBB {
 		}
     }
 }
+ */
