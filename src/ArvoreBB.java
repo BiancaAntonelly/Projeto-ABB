@@ -14,6 +14,11 @@ public class ArvoreBB {
 		return raiz;
 	}
 
+	public void setRaiz (No raiz){
+		this.raiz = raiz;
+	}
+
+
 	public void inserirNo(No noNovo, No noAtual) {
 			if (noNovo.getValor() == noAtual.getValor()) {
 				System.out.println(noNovo.getValor() + " já está na árvore, não pode ser inserido");
@@ -83,7 +88,6 @@ public class ArvoreBB {
 				no.setNoDireito(removerNo(noAtual, no.getNoDireito()));
 			}
 		}
-
 		return no;
 	}
 
@@ -266,52 +270,40 @@ public class ArvoreBB {
 		return saida;
 	}
 
-
-}
-
-/*
-	public int altura(No no) {
-		if(no == null) {
-			return -1;
-		} else {
-			int qtdNosEsquerda = altura(no.getNoEsquerdo());
-			int qtdNosDireita = altura(no.getNoDireito());
-			if(qtdNosEsquerda > qtdNosDireita) {
-				return qtdNosEsquerda + 1;
-			} else {
-				return qtdNosDireita + 1;
-			}
-		}
-	}
-
 	public boolean verificaCompleta(No no) {
-		if (no == null) {
-			return true;
+		if(no.getNoEsquerdo() != null) {
+			return verificaCompleta(no.getNoEsquerdo());
 		}
 
-		int alturaRaiz = altura(raiz);
-		int altura = altura(no);
-	
-		if (altura < alturaRaiz || altura < alturaRaiz - 1) {
+		if (altura(no) < altura(raiz) - 1) {
 			return false;
 		}
-	
-		return (verificaCompleta(no.getNoEsquerdo()) &&
-				verificaCompleta(no.getNoDireito()));
+
+		if(no.getNoEsquerdo() != null) {
+			return verificaCompleta(no.getNoEsquerdo());
+		}
+
+		return true;
 	}
 
 	public String ehCompleta(No no) {
-		if (no == null) {
+		if(no == null) {
+			return "A árvore é completa";
+		}
+
+		boolean verifica = false;
+
+		if(no.getNoEsquerdo() != null) {
+			verifica = verificaCompleta(no.getNoEsquerdo());
+		}
+
+		if(no.getNoDireito() != null) {
+			verifica = verificaCompleta(no.getNoDireito());
+		}
+
+		if(verifica == true) {
 			return "A árvore é completa!";
 		}
-	
-		boolean completa = verificaCompleta(no);
-	
-		if (completa) {
-			return "A árvore é completa!";
-		} else {
-			return "A árvore não é completa!";
-		}
-    }
+		return "A árvore não é completa!";
+	}
 }
- */

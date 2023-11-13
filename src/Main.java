@@ -39,6 +39,38 @@ public class Main {
                     case "CHEIA":
                         System.out.println(arvoreBB.cheiaOuNaoCheia(arvoreBB.getRaiz()));
                         break;
+                    case "COMPLETA": 
+                        System.out.println(arvoreBB.ehCompleta(arvoreBB.getRaiz()));
+                        break;
+                    case "PREORDEM": 
+                        System.out.println("Impressão em pré-ordem:" + arvoreBB.preOrdem(arvoreBB.getRaiz()));
+                        break;
+                    case "INSIRA":
+                        arvoreBB.inserirNo(new No(Integer.parseInt(entrada[1])), no);
+                        break;
+                    case "BUSCAR":
+                        No k = arvoreBB.buscaNo(Integer.parseInt(entrada[1]), no);
+                        if(k != null) {
+                            System.out.println("O nó com valor "+ k.getValor() + " existe na árvore");
+                        } else {
+                             System.out.println("O nó não existe na árvore");
+                        }
+                        break;
+                    case "REMOVA":
+                       No n = arvoreBB.removerNo(Integer.parseInt(entrada[1]), arvoreBB.getRaiz());
+                       arvoreBB.setRaiz(no);
+                       break;
+                    case "IMPRIMA":
+                        if(Integer.parseInt(entrada[1]) == 1) {
+                            System.out.println("Impressão 1: ");
+                            arvoreBB.imprimirBarras(arvoreBB.getRaiz(), 0, 0);
+                        } else {
+                            System.out.println("Impressão 2: " + "\n" + arvoreBB.imprimirParenteses(arvoreBB.getRaiz()));
+                        }
+                        break;
+                    case "POSICAO": 
+                        //...
+                        break;
                     default:
                         break;
                 }
@@ -52,6 +84,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        comandosdeEntrada("C:\\Users\\vanessa.silva.700\\Desktop\\projetoedb2\\Projeto-ABB\\src\\arquivostxt\\abb", "C:\\Users\\vanessa.silva.700\\Desktop\\projetoedb2\\Projeto-ABB\\src\\arquivostxt\\arquivoEntrada");
+        comandosdeEntrada("C:\\Users\\v_mar\\Documents\\UFRN 2023.2\\EDB II\\ProjetoEDB2\\Projeto-ABB\\src\\arquivostxt\\abb", 
+        "C:\\Users\\v_mar\\Documents\\UFRN 2023.2\\EDB II\\ProjetoEDB2\\Projeto-ABB\\src\\arquivostxt\\arquivoEntrada");
     }
 }
