@@ -4,9 +4,9 @@ import java.util.Scanner;
 import javax.swing.text.html.StyleSheet;
 
 public class Main {
-    public static void arvoreEntrada(String caminhoArquivo) {
+    public static void comandosdeEntrada(String abbEntrada, String caminhoArquivo) {
         try {
-            Scanner sc = new Scanner(new File(caminhoArquivo));
+            Scanner sc = new Scanner(new File(abbEntrada));
             sc.useDelimiter(" ");
             No no = new No(Integer.parseInt(sc.next()));
             ArvoreBB arvoreBB = new ArvoreBB(no);
@@ -17,33 +17,6 @@ public class Main {
             }
             sc.close();
 
-            arvoreBB.imprimirArvore(no);
-
-            No n = arvoreBB.buscaNo(5, no);
-            if(n == null) {
-                System.out.println("O nó buscado não existe na árvore");
-            } else {
-                 System.out.println("O nó " + n.getValor() + " existe na árvore binária");
-            }
-
-
-           System.out.println("O valor do enesimo é: "+ arvoreBB.enesimoElemento(2));
-
-           String r = arvoreBB.preOrdem(no);
-           System.out.println("Impressão em pré-ordem: "+ r);
-
-            
-           System.out.println(arvoreBB.cheiaOuNaoCheia(no));
-           System.out.println(arvoreBB.ehCompleta(no));
-            System.out.println("Altura: "+arvoreBB.altura(no));
-           //arvoreBB.ordemSimetrica(no);
-        } catch (FileNotFoundException e) {
-            System.err.println("O arquivo não foi encontrado: " + caminhoArquivo);
-        }
-    }
-
-   /*public static void comandosdeEntrada(String caminhoArquivo) {
-        try {
             File comandos = new File(caminhoArquivo);
             FileReader leitura = new FileReader(comandos);
             BufferedReader bufferedReader = new BufferedReader(leitura);
@@ -57,16 +30,16 @@ public class Main {
                 }
                 switch (entrada[0]) {
                     case "ENESIMO":
-                        System.out.println(ArvoreBB.enesimoElemento(Integer.parseInt(entrada[1])));
+                        System.out.println(arvoreBB.enesimoElemento(Integer.parseInt(entrada[1])));
                         break;
                     case "MEDIANA":
-                        System.out.println(ArvoreBB.mediana());
+                        System.out.println(arvoreBB.mediana());
                         break;
                     case "MEDIA":
-                        System.out.println(ArvoreBB.media());
+                        System.out.println(arvoreBB.media());
                         break;
                     case "CHEIA":
-                        System.out.println(ArvoreBB.cheiaOuNaoCheia(ArvoreBB.raiz));
+                        System.out.println(arvoreBB.cheiaOuNaoCheia(arvoreBB.getRaiz()));
                         break;
                     default:
                         break;
@@ -74,14 +47,13 @@ public class Main {
             }
             bufferedReader.close();
         } catch (FileNotFoundException e) {
-            System.err.println("O arquivo não foi encontrado: " + caminhoArquivo);
+            System.err.println("O arquivo de entrada de dados não foi encontrado");
         } catch (IOException e) {
             System.err.println("Ocorreu um erro de leitura do arquivo: " + e.getMessage());
         }
-    }*/
+    }
 
     public static void main(String[] args) {
-        arvoreEntrada("C:\\Users\\v_mar\\Desktop\\ProjetoEDB2\\Projeto-ABB\\src\\arquivostxt\\abb");
-        //comandosdeEntrada("C:\\Users\\v_mar\\Desktop\\ProjetoABB\\Projeto-ABB\\src\\arquivostxt\\abb");
+        comandosdeEntrada("C:\\Users\\vanessa.silva.700\\Desktop\\projetoedb2\\Projeto-ABB\\src\\arquivostxt\\abb", "C:\\Users\\vanessa.silva.700\\Desktop\\projetoedb2\\Projeto-ABB\\src\\arquivostxt\\arquivoEntrada");
     }
 }

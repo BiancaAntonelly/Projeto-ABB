@@ -1,11 +1,10 @@
-import java.util.LinkedList;
-import java.util.Queue;
-
-import javax.swing.tree.TreeNode;
-
 public class ArvoreBB {
 	private No raiz = null;
 	private int quantidadeDeNos = 0;
+
+	public ArvoreBB (){
+		
+	}
 
 	public ArvoreBB (No raiz){
 		this.raiz = raiz;
