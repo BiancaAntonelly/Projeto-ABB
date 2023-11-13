@@ -28,6 +28,7 @@ public class ArvoreBB {
 				} else {
 					noAtual.setNoEsquerdo(noNovo);
 					noAtual.setQuantidadeDeNosAEsquerda(noAtual.getQuantidadeDeNosAEsquerda() + 1);
+					System.out.println(noNovo.getValor() + " adicionado");
 				}
 			} else if (noNovo.getValor() > noAtual.getValor()) {
 				if(noAtual.getNoDireito() != null) {
@@ -35,6 +36,7 @@ public class ArvoreBB {
 				} else {
 					noAtual.setNoDireito(noNovo);
 					noAtual.setQuantidadeDeNosADireita(noAtual.getQuantidadeDeNosADireita() + 1);
+					System.out.println(noNovo.getValor() + " adicionado");
 				}
 			}
 	}
@@ -57,21 +59,35 @@ public class ArvoreBB {
 		}
 	}
 
-	public int noMin(No no) {
-		if (no == null) return -1;
-		if(no.getNoEsquerdo() == null) return no.getValor();
-		return noMin(no.getNoEsquerdo());
+	public No noMin(No no) {
+		if(no == null) {
+			return null;
+		}
+
+		while(no.getNoEsquerdo() != null) {
+			no = noMin(no.getNoEsquerdo());
+		}
+
+		return no;
 	}
 
-	public int noMax(No no) {
-		if (no == null) return -1;
-		if(no.getNoDireito() == null) return no.getValor();
-		
-		return noMax(no.getNoDireito());
+	public void remover(int valor, No no) {
+		No node = buscaNo(valor, raiz);
+
+		if(node == null) {
+			System.out.println(valor + " não está na árvore, não pode ser removido");
+		} else {
+			No n = removerNo(valor, no);
+			this.raiz = n;
+			System.out.println(valor + " removido");
+		}
+
 	}
 
 	public No removerNo(int valor, No no) {
-		if (no == null) return no;
+		if (no == null) {
+			return no;
+		}
 
 		if (valor < no.getValor()) {
 			no.setNoEsquerdo(removerNo(valor, no.getNoEsquerdo()));
@@ -83,9 +99,9 @@ public class ArvoreBB {
 			} else if(no.getNoDireito() == null) {
 				return no.getNoEsquerdo();
 			} else {
-				int noAtual = noMin(no.getNoDireito());
-				no.setValor(noAtual);
-				no.setNoDireito(removerNo(noAtual, no.getNoDireito()));
+				No noMin = noMin(no.getNoDireito());
+				no.setValor(noMin.getValor());
+				no.setNoDireito(removerNo(noMin.getValor(), no.getNoDireito()));
 			}
 		}
 		return no;
