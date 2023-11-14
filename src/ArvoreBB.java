@@ -107,6 +107,27 @@ public class ArvoreBB {
 		return no;
 	}
 
+	public static void posicao(No raiz, int elemento) {
+		if (raiz != null) {
+			int posicao = 0;
+			No atual = raiz;
+
+			do {
+				Integer qtdNosEsquerda = atual.getQuantidadeDeNosAEsquerda();
+				posicao += qtdNosEsquerda + 1;
+				if (atual.getValor() == elemento) {
+					System.out.println(posicao);
+					return;
+				}
+				else if (atual.getValor() > elemento) {
+					atual = atual.getNoEsquerdo();
+					posicao -= qtdNosEsquerda + 1;
+				} else {
+					atual = atual.getNoDireito();
+				}
+			}while(true);
+		}
+	}
 	public void imprimirArvore(No no) {
 		if (no.getNoEsquerdo() != null) {
 			imprimirArvore(no.getNoEsquerdo());
@@ -147,6 +168,7 @@ public class ArvoreBB {
 			}
 		}
 	}
+
 
 	public int mediana() {
 		int nosTotais = raiz.quantidadeTotalDeFilhos();

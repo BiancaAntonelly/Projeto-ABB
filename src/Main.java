@@ -28,13 +28,13 @@ public class Main {
                 }
                 switch (entrada[0]) {
                     case "ENESIMO":
-                        System.out.println("Enesimo: " + arvoreBB.enesimoElemento(Integer.parseInt(entrada[1])));
+                        System.out.println(arvoreBB.enesimoElemento(Integer.parseInt(entrada[1])));
                         break;
                     case "MEDIANA":
-                        System.out.println("Mediana: "+ arvoreBB.mediana());
+                        System.out.println("mediana"+arvoreBB.mediana());
                         break;
                     case "MEDIA":
-                        System.out.println("Média: "+ arvoreBB.media());
+                        System.out.println(arvoreBB.media());
                         break;
                     case "CHEIA":
                         System.out.println(arvoreBB.cheiaOuNaoCheia(arvoreBB.getRaiz()));
@@ -43,7 +43,7 @@ public class Main {
                         System.out.println(arvoreBB.ehCompleta(arvoreBB.getRaiz()));
                         break;
                     case "PREORDEM": 
-                        System.out.println("Impressão em pré-ordem:" + arvoreBB.preOrdem(arvoreBB.getRaiz()));
+                        System.out.println(arvoreBB.preOrdem(arvoreBB.getRaiz()));
                         break;
                     case "INSIRA":
                         arvoreBB.inserirNo(new No(Integer.parseInt(entrada[1])), no);
@@ -66,8 +66,8 @@ public class Main {
                             System.out.println(ArvoreBB.imprimirParenteses(arvoreBB.getRaiz()));
                         }
                         break;
-                    case "POSICAO": 
-                        //...
+                    case "POSICAO":
+                        ArvoreBB.posicao(arvoreBB.getRaiz(), Integer.parseInt(entrada[1]));
                         break;
                     default:
                         break;
@@ -83,7 +83,7 @@ public class Main {
 
     public static void main(String[] args) {
         ArvoreBB arvore = new ArvoreBB();
-        comandosdeEntrada("C:\\Users\\v_mar\\Desktop\\ProjetoEDB2\\Projeto-ABB\\src\\arquivostxt\\abb",
-                "C:\\Users\\v_mar\\Desktop\\ProjetoEDB2\\Projeto-ABB\\src\\arquivostxt\\arquivoEntrada");
+        comandosdeEntrada("C:\\Users\\bianc\\Downloads\\Projeto-ABB-main\\src\\arquivostxt\\abb",
+                "C:\\Users\\bianc\\Downloads\\Projeto-ABB-main\\src\\arquivostxt\\arquivoEntrada");
     }
 }
