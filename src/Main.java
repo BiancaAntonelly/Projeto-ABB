@@ -31,7 +31,7 @@ public class Main {
                         System.out.println(arvoreBB.enesimoElemento(Integer.parseInt(entrada[1])));
                         break;
                     case "MEDIANA":
-                        System.out.println("Mediana: " + arvoreBB.mediana());
+                        System.out.println(arvoreBB.mediana());
                         break;
                     case "MEDIA":
                         System.out.println(arvoreBB.media());
@@ -51,7 +51,7 @@ public class Main {
                     case "BUSCAR":
                         No k = arvoreBB.buscaNo(Integer.parseInt(entrada[1]), no);
                         if(k != null) {
-                            System.out.println("O nó com valor "+ k.getValor() + " existe na árvore");
+                            System.out.println("Chave encontrada");
                         } else {
                              System.out.println("O nó não existe na árvore");
                         }

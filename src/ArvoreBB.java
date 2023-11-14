@@ -181,22 +181,25 @@ public class ArvoreBB {
 	}
 
 
-	public double mediana() {
+	public int mediana() {
 		int nosTotais = raiz.quantidadeTotalDeFilhos() + 1;
-		double valorMediana;
 
 		if (nosTotais % 2 != 0) {
+			// Ímpar: retorna o elemento central
 			int posicaoMediana = ((nosTotais + 1) / 2);
-			valorMediana = enesimoElemento(posicaoMediana);
+			return enesimoElemento(posicaoMediana);
 		} else {
+			// Par: retorna o menor dentre os dois elementos medianos
 			int posicaoMediana1 = nosTotais / 2;
 			int posicaoMediana2 = nosTotais / 2 + 1;
 			int valor1 = enesimoElemento(posicaoMediana1);
 			int valor2 = enesimoElemento(posicaoMediana2);
-			valorMediana = (valor1 + valor2) / 2;
+
+			// Retorna o menor entre valor1 e valor2
+			return Math.min(valor1, valor2);
 		}
-		return valorMediana;
 	}
+
 
 	public double media() {
 		int nosTotais = raiz.quantidadeTotalDeFilhos() + 1;
