@@ -1,4 +1,2 @@
 INDEX VERSION 1.134+C:\Users\bianc\OneDrive\Documentos\GitHub\Projeto-ABB\.metadata\.plugins\org.eclipse.jdt.core
 1865797976.index
-1696264553.index
-3771774322.index
