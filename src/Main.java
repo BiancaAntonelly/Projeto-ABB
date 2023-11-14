@@ -31,7 +31,7 @@ public class Main {
                         System.out.println(arvoreBB.enesimoElemento(Integer.parseInt(entrada[1])));
                         break;
                     case "MEDIANA":
-                        System.out.println("mediana"+arvoreBB.mediana());
+                        System.out.println("Mediana: " + arvoreBB.mediana());
                         break;
                     case "MEDIA":
                         System.out.println(arvoreBB.media());
@@ -82,8 +82,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        ArvoreBB arvore = new ArvoreBB();
-        comandosdeEntrada("C:\\Users\\bianc\\Downloads\\Projeto-ABB-main\\src\\arquivostxt\\abb",
-                "C:\\Users\\bianc\\Downloads\\Projeto-ABB-main\\src\\arquivostxt\\arquivoEntrada");
+        comandosdeEntrada("C:\\Users\\v_mar\\Desktop\\projetoedb\\Projeto-ABB\\src\\arquivostxt\\abb",
+                "C:\\Users\\v_mar\\Desktop\\projetoedb\\Projeto-ABB\\src\\arquivostxt\\arquivoEntrada");
     }
 }

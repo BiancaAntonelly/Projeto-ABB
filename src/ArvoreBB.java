@@ -1,6 +1,5 @@
 public class ArvoreBB {
 	private No raiz = null;
-	private int quantidadeDeNos = 0;
 
 	public ArvoreBB (){
 		
@@ -17,7 +16,6 @@ public class ArvoreBB {
 	public void setRaiz (No raiz){
 		this.raiz = raiz;
 	}
-
 
 	public void inserirNo(No noNovo, No noAtual) {
 			if (noNovo.getValor() == noAtual.getValor()) {
@@ -39,7 +37,19 @@ public class ArvoreBB {
 					System.out.println(noNovo.getValor() + " adicionado");
 				}
 			}
+			contNos(noAtual);
 	}
+
+	public void contNos(No noAtual) {
+        if (noAtual.getNoEsquerdo() != null && noAtual.getNoDireito() != null) {
+            noAtual.setQuantidadeDeNosAEsquerda(noAtual.getNoEsquerdo().getQuantidadeDeNosAEsquerda() + noAtual.getNoDireito().getQuantidadeDeNosADireita() + 1);
+            noAtual.setQuantidadeDeNosADireita (noAtual.getNoDireito().getQuantidadeDeNosAEsquerda() + noAtual.getNoDireito().getQuantidadeDeNosADireita() + 1);
+        } else if (noAtual.getNoEsquerdo() != null && noAtual.getNoDireito() == null) {
+            noAtual.setQuantidadeDeNosAEsquerda(noAtual.getNoEsquerdo().getQuantidadeDeNosAEsquerda() + noAtual.getNoEsquerdo().getQuantidadeDeNosADireita() + 1);
+        } else if (noAtual.getNoDireito() != null) {
+            noAtual.setQuantidadeDeNosADireita(noAtual.getNoDireito().getQuantidadeDeNosAEsquerda() + noAtual.getNoDireito().getQuantidadeDeNosADireita() + 1);
+        }
+    }
 
 	public No buscaNo(int valor, No noAtual) {
 		 if (valor == noAtual.getValor()){
@@ -80,6 +90,7 @@ public class ArvoreBB {
 			No n = removerNo(valor, no);
 			this.raiz = n;
 			System.out.println(valor + " removido");
+			contNos(raiz);
 		}
 
 	}
@@ -118,16 +129,16 @@ public class ArvoreBB {
 				if (atual.getValor() == elemento) {
 					System.out.println(posicao);
 					return;
-				}
-				else if (atual.getValor() > elemento) {
+				} else if (atual.getValor() > elemento) {
 					atual = atual.getNoEsquerdo();
 					posicao -= qtdNosEsquerda + 1;
 				} else {
 					atual = atual.getNoDireito();
 				}
-			}while(true);
+			} while (true);
 		}
 	}
+
 	public void imprimirArvore(No no) {
 		if (no.getNoEsquerdo() != null) {
 			imprimirArvore(no.getNoEsquerdo());
@@ -170,9 +181,9 @@ public class ArvoreBB {
 	}
 
 
-	public int mediana() {
-		int nosTotais = raiz.quantidadeTotalDeFilhos();
-		int valorMediana;
+	public double mediana() {
+		int nosTotais = raiz.quantidadeTotalDeFilhos() + 1;
+		double valorMediana;
 
 		if (nosTotais % 2 != 0) {
 			int posicaoMediana = ((nosTotais + 1) / 2);
