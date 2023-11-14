@@ -1,5 +1,5 @@
 public class ArvoreBB {
-	private No raiz = null;
+	public static No raiz = null;
 
 	public ArvoreBB (){
 		
@@ -198,25 +198,25 @@ public class ArvoreBB {
 		return valorMediana;
 	}
 
-	public int media() {
-		int nosTotais = raiz.quantidadeTotalDeFilhos();
-		int soma = calcularSoma(raiz);
+	public double media() {
+		int nosTotais = raiz.quantidadeTotalDeFilhos() + 1;
+		double soma = calcularSoma(raiz);
 
 		if (nosTotais > 0) {
-			int valorMedia = soma / nosTotais;
+			double valorMedia = soma / nosTotais;
 			return valorMedia;
 		} else {
-			return 0;
+			return 0.0;
 		}
 	}
 
-	private int calcularSoma(No no) {
+	private double calcularSoma(No no) {
 		if (no == null) {
-			return 0;
+			return 0.0;
 		}
 
-		int somaEsquerda = calcularSoma(no.getNoEsquerdo());
-		int somaDireita = calcularSoma(no.getNoDireito());
+		double somaEsquerda = calcularSoma(no.getNoEsquerdo());
+		double somaDireita = calcularSoma(no.getNoDireito());
 
 		return somaEsquerda + no.getValor() + somaDireita;
 	}

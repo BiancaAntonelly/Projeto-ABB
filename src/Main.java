@@ -82,7 +82,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        comandosdeEntrada("C:\\Users\\v_mar\\Desktop\\projetoedb\\Projeto-ABB\\src\\arquivostxt\\abb",
-                "C:\\Users\\v_mar\\Desktop\\projetoedb\\Projeto-ABB\\src\\arquivostxt\\arquivoEntrada");
+        comandosdeEntrada("C:\\Users\\bianc\\Downloads\\Projeto-ABB-main\\src\\arquivostxt\\abb",
+                "C:\\Users\\bianc\\Downloads\\Projeto-ABB-main\\src\\arquivostxt\\arquivoEntrada");
     }
 }
